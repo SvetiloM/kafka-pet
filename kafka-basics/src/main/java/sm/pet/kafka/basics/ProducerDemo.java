@@ -1,12 +1,12 @@
 package sm.pet.kafka.basics;
 
 import java.util.Properties;
-import lombok.extern.java.Log;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import sm.pet.kafka.basics.utils.Utils;
 
-@Log
+@Slf4j
 public class ProducerDemo {
 
 

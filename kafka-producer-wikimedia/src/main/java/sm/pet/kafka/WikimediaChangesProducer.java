@@ -10,7 +10,7 @@ import sm.pet.kafka.basics.utils.Utils;
 
 public class WikimediaChangesProducer {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         Properties producerProperties = Utils.getProducerProperties();
 
         KafkaProducer<String, String> producer = new KafkaProducer<>(producerProperties);

@@ -1,4 +1,4 @@
-package sm.pet.kafka.basics;
+package sm.pet.kafka.basics.producer;
 
 import java.util.Properties;
 import lombok.extern.slf4j.Slf4j;
@@ -12,7 +12,7 @@ public class ProducerDemoKeys {
 
 
     public static void main(String[] args) {
-        Properties properties = Utils.getProperties();
+        Properties properties = Utils.getProducerProperties();
 
         KafkaProducer<String, String> producer = new KafkaProducer<>(properties);
 

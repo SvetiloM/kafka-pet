@@ -1,6 +1,7 @@
 package sm.pet.kafka.basics.utils;
 
 import java.util.Properties;
+import org.apache.kafka.common.serialization.StringDeserializer;
 import org.apache.kafka.common.serialization.StringSerializer;
 
 public class Utils {
@@ -11,12 +12,23 @@ public class Utils {
     private static final String SASL_MECHANISM = "sasl.mechanism";
     private static final String KEY_SERIALIZER = "key.serializer";
     private static final String VALUE_SERIALIZER = "value.serializer";
+    private static final String KEY_DESERIALIZER = "key.deserializer";
+    private static final String VALUE_DESERIALIZER = "value.deserializer";
 
-    public static Properties getProperties() {
+    public static Properties getProducerProperties() {
         Properties properties = new Properties();
 
         enRichConnection(properties);
-        enrichSerializers(properties);
+        enrichProducerProperties(properties);
+
+        return properties;
+    }
+
+    public static Properties getConsumerProperties() {
+        Properties properties = new Properties();
+
+        enRichConnection(properties);
+        enrichConsumerProperties(properties);
 
         return properties;
     }
@@ -31,9 +43,14 @@ public class Utils {
         properties.setProperty(BOOTSTRAP_SERVERS, System.getenv(BOOTSTRAP_SERVERS));
     }
 
-    private static void enrichSerializers(Properties properties) {
+    private static void enrichProducerProperties(Properties properties) {
         properties.setProperty(KEY_SERIALIZER, StringSerializer.class.getName());
         properties.setProperty(VALUE_SERIALIZER, StringSerializer.class.getName());
+    }
+
+    private static void enrichConsumerProperties(Properties properties) {
+        properties.setProperty(KEY_DESERIALIZER, StringDeserializer.class.getName());
+        properties.setProperty(VALUE_DESERIALIZER, StringDeserializer.class.getName());
     }
 
 }

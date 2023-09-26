@@ -1,11 +1,10 @@
-package sm.pet.kafka.basics;
+package sm.pet.kafka.basics.producer;
 
 import java.util.Properties;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.producer.Callback;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerRecord;
-import org.apache.kafka.clients.producer.RecordMetadata;
 import sm.pet.kafka.basics.utils.Utils;
 
 @Slf4j
@@ -13,7 +12,7 @@ public class ProducerDemoWithCallback {
 
 
     public static void main(String[] args) {
-        Properties properties = Utils.getProperties();
+        Properties properties = Utils.getProducerProperties();
 
         KafkaProducer<String, String> producer = new KafkaProducer<>(properties);
 

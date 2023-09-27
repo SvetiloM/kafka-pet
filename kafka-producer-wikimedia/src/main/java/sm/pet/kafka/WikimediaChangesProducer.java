@@ -17,7 +17,7 @@ public class WikimediaChangesProducer {
 
         EventHandler handler = new WikimediaChangeHandler(producer, System.getenv("wikimedia.topic"));
 
-        EventSource.Builder builder =  new EventSource.Builder(handler, URI.create("wikimedia.url"));
+        EventSource.Builder builder =  new EventSource.Builder(handler, URI.create(System.getenv("wikimedia.url")));
         EventSource eventSource = builder.build();
 
         // start the producer in another thread

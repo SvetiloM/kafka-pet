@@ -1,19 +1,16 @@
 package sm.pet.kafka.basics.utils;
 
+import static org.apache.kafka.clients.CommonClientConfigs.SECURITY_PROTOCOL_CONFIG;
+import static org.apache.kafka.common.config.SaslConfigs.SASL_JAAS_CONFIG;
+import static org.apache.kafka.common.config.SaslConfigs.SASL_MECHANISM;
+
 import java.util.Properties;
+import org.apache.kafka.clients.consumer.ConsumerConfig;
+import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.apache.kafka.common.serialization.StringSerializer;
 
 public class Utils {
-
-    private static final String BOOTSTRAP_SERVERS = "bootstrap.servers";
-    private static final String SECURITY_PROTOCOL = "security.protocol";
-    private static final String SASL_JAAS_CONFIG = "sasl.jaas.config";
-    private static final String SASL_MECHANISM = "sasl.mechanism";
-    private static final String KEY_SERIALIZER = "key.serializer";
-    private static final String VALUE_SERIALIZER = "value.serializer";
-    private static final String KEY_DESERIALIZER = "key.deserializer";
-    private static final String VALUE_DESERIALIZER = "value.deserializer";
 
     public static Properties getProducerProperties() {
         Properties properties = new Properties();
@@ -34,23 +31,23 @@ public class Utils {
     }
 
     private static void enRichConnection(Properties properties) {
-        if (System.getenv(SECURITY_PROTOCOL) != null) {
-            properties.setProperty(SECURITY_PROTOCOL, System.getenv(SECURITY_PROTOCOL));
+        if (System.getenv(SECURITY_PROTOCOL_CONFIG) != null) {
+            properties.setProperty(SECURITY_PROTOCOL_CONFIG, System.getenv(SECURITY_PROTOCOL_CONFIG));
             properties.setProperty(SASL_JAAS_CONFIG, System.getenv(SASL_JAAS_CONFIG));
             properties.setProperty(SASL_MECHANISM, System.getenv(SASL_MECHANISM));
         }
 
-        properties.setProperty(BOOTSTRAP_SERVERS, System.getenv(BOOTSTRAP_SERVERS));
+        properties.setProperty(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, System.getenv(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG));
     }
 
     private static void enrichProducerProperties(Properties properties) {
-        properties.setProperty(KEY_SERIALIZER, StringSerializer.class.getName());
-        properties.setProperty(VALUE_SERIALIZER, StringSerializer.class.getName());
+        properties.setProperty(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
+        properties.setProperty(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
     }
 
     private static void enrichConsumerProperties(Properties properties) {
-        properties.setProperty(KEY_DESERIALIZER, StringDeserializer.class.getName());
-        properties.setProperty(VALUE_DESERIALIZER, StringDeserializer.class.getName());
+        properties.setProperty(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
+        properties.setProperty(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
     }
 
 }
